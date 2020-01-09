@@ -26,6 +26,8 @@ $(document).ready(function() {
 // intercetto il click sul pulsante Precedente
 
     $("#mese_prec").click(function(){
+
+        console.log("#mese-corrente");
         // aggiungo un mese alla data da visualzzare
         moment_iniziale.subtract(1, "months");
         // visualizzo il calendario aggiornato
@@ -49,7 +51,7 @@ $(document).ready(function() {
         // recupero i giorni del mese da visulazzioare
             var giorni_mese = data_mese.daysInMonth();
             var mese_testuale = data_mese.format("MMMM");
-
+            mese_testuale = mese_testuale.charAt(0).toUpperCase() + mese_testuale.slice(1);
             // imposto il titolo con il mese corrente
             $("#mese-corrente").text(mese_testuale);
 
