@@ -1,0 +1,42 @@
+ <!DOCTYPE html>
+  <html lang="it" dir="ltr">
+      <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <!--  FONTAWESOME -->
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+          <!--  GOOGLE FONTS -->
+          <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+          <!--  FOGLIO CSS -->
+          <link rel="stylesheet" href="style.css">
+          <!--  CHIAMATA AJAX -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <!--  HANDLEBARS -->
+          <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+          <!--  MOMENT.JS -->
+          <script src="https://momentjs.com/downloads/moment.min.js"></script>
+          <!--  MOMENT.JS ITA -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/it.js"></script>
+          <script src="main.js" charset="utf-8"></script>
+      <title></title>
+      </head>
+
+      <body>
+
+         <header>
+             <h1><span id="mese-corrente"></span> 2018 </h1>
+             <div class="navigazione-mesi">
+                 <button id="mese_prec"><i class="fas fa-chevron-circle-left"></i>Precedente</button>
+                 <button id="mese_succ">Successivo <i class="fas fa-chevron-circle-right"></i></button>
+             </div>
+         </header>
+         <main>
+             <ul id="calendario">
+
+             </ul>
+         </main>
+         <script id="giorno-template" type="text/x-handlebars-template">
+             <li data-giorno="{{ standard_day}}"> {{ day }} </li>
+         </script>
+     </body>
+ </html>
