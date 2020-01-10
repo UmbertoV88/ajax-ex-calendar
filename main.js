@@ -7,32 +7,46 @@ $(document).ready(function() {
 // -----------------------------
 
     var data_iniziale = '2018-01-01';
-    var moment_iniziale = moment(data_iniziale);
+    var moment_data = moment(data_iniziale);
+
+    // creo due variabili come inizio e fine del calendario
+    var inizio_calendario = "2018-01-01";
+    var fine_calendario = "2018-12-01";//imposto il giorno 1 invecere del 31 cosi posso usare isSameOrAfter aggiungendo soltanto un mese alla data iniziale
 
 // visualizzo il calendario iniziale con gennaio
-    stampa_mese(moment_iniziale);
-    stampa_festivita(moment_iniziale);
+    stampa_mese(moment_data);
+    stampa_festivita(moment_data);
 
 // intercetto il click sul pulsante succ
     $("#mese_succ").click(function(){
-        // aggiungo un mese alla data da visualzzare
-        moment_iniziale.add(1, "months");
-        // visualizzo il calendario aggiornato
-        stampa_mese(moment_iniziale);
-        stampa_festivita(moment_iniziale);
+        // controllo che la fata non sfori dalle date disponibili
+        if (moment_data.isSameOrAfter(fine_calendario)) {
+            alert("mese non disp");
+            $(this).prop("disabled", true);//aggiungo la funzione disabled per disattivare la funzionalità del bottone
+        }else{
+            // aggiungo un mese alla data da visualzzare
+            moment_data.add(1, "months");
+            // visualizzo il calendario aggiornato
+            stampa_mese(moment_data);
+            stampa_festivita(moment_data);
+        }
 
     });
 
 // intercetto il click sul pulsante Precedente
 
     $("#mese_prec").click(function(){
+        if (moment_data.isSameOrBefore(inizio_calendario)) {
+            alert("mese non disp");
+            $(this).prop("disabled", true);//aggiungo la funzione disabled per disattivare la funzionalità del bottone
+        }else{
+            // aggiungo un mese alla data da visualzzare
+            moment_data.subtract(1, "months");
+            // visualizzo il calendario aggiornato
+            stampa_mese(moment_data);
+            stampa_festivita(moment_data);
+        }
 
-        console.log("#mese-corrente");
-        // aggiungo un mese alla data da visualzzare
-        moment_iniziale.subtract(1, "months");
-        // visualizzo il calendario aggiornato
-        stampa_mese(moment_iniziale);
-        stampa_festivita(moment_iniziale);
 
     });
 // ---------------------------
@@ -45,8 +59,6 @@ $(document).ready(function() {
         // SOLUZIONE A
         // colono la data del mese cosi da poter sommare i giorni
         // var data_mese_giorno = moment(data_mese);
-
-
 
         // recupero i giorni del mese da visulazzioare
             var giorni_mese = data_mese.daysInMonth();
