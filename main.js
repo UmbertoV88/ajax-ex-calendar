@@ -16,38 +16,34 @@ $(document).ready(function() {
 // visualizzo il calendario iniziale con gennaio
     stampa_mese(moment_data);
     stampa_festivita(moment_data);
+    $("#mese_prec").prop("disabled", true);
 
 // intercetto il click sul pulsante succ
     $("#mese_succ").click(function(){
-        // controllo che la fata non sfori dalle date disponibili
-        if (moment_data.isSameOrAfter(fine_calendario)) {
-            alert("mese non disp");
-            $(this).prop("disabled", true);//aggiungo la funzione disabled per disattivare la funzionalità del bottone
-        }else{
             // aggiungo un mese alla data da visualzzare
             moment_data.add(1, "months");
             // visualizzo il calendario aggiornato
             stampa_mese(moment_data);
             stampa_festivita(moment_data);
-        }
-
+            $("#mese_prec").prop("disabled", false);//disattivo la proprietà disabled per far funzionare il tasto per tornare ad utilizzare il bottone negli altri mesi
+            if (moment_data.isSameOrAfter(fine_calendario)) {
+                // controllo che la fata non sfori dalle date disponibili
+                $(this).prop("disabled", true);//aggiungo la funzione disabled per disattivare la funzionalità del bottone
+            }
     });
 
 // intercetto il click sul pulsante Precedente
 
     $("#mese_prec").click(function(){
-        if (moment_data.isSameOrBefore(inizio_calendario)) {
-            alert("mese non disp");
-            $(this).prop("disabled", true);//aggiungo la funzione disabled per disattivare la funzionalità del bottone
-        }else{
             // aggiungo un mese alla data da visualzzare
             moment_data.subtract(1, "months");
             // visualizzo il calendario aggiornato
             stampa_mese(moment_data);
             stampa_festivita(moment_data);
-        }
-
-
+            $("#mese_succ").prop("disabled", false);//disattivo la proprietà disabled per far funzionare il tasto per tornare ad utilizzare il bottone negli altri mesi
+            if (moment_data.isSameOrBefore(inizio_calendario)) {
+                $(this).prop("disabled", true);//aggiungo la funzione disabled per disattivare la funzionalità del bottone
+            }
     });
 // ---------------------------
 // -------FUNZIONI------------
@@ -75,9 +71,10 @@ $(document).ready(function() {
                 var giorno_standard = data_mese.format("YYYY-MM-") + formatta_giorno(i);
 
                 var variabili = {
-                    day: i + " " + mese_testuale,
+                    day: i + " " + moment(giorno_standard).format("ddd"),
                     // standard_day: data_mese_giorno.format("YYY-MM-DD")
-                    standard_day: giorno_standard
+                    standard_day: giorno_standard,
+
                 };
                 var html_finale = template_function(variabili);
                 $("#calendario").append(html_finale);

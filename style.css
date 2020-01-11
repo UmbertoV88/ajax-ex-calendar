@@ -21,9 +21,29 @@ header {
     color: white;
     font-size: 20px;
     padding: 5px 10px;
+}
 
+.navigazione-mesi button:disabled {
+    background-color: lightgrey;
+    cursor: no-drop;
 }
 
 .festa {
     color: red;
+    background: lightpink;
+}
+
+#calendario {
+    display: flex;
+    flex-flow: wrap;
+    margin-left: calc(100% - 1410px);
+}
+
+#calendario li {
+    border: 1px solid black;
+    width: 200px;
+    height: 120px;
+    padding: 20px;
+    list-style-type: none;
+
 }
